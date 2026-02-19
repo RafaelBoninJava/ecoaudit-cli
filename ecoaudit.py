@@ -2,7 +2,6 @@ import json
 import os
 from datetime import datetime
 
-
 CHECKLISTS = {
     "Resíduos": [
         "Lixeiras identificadas e disponíveis (orgânico/reciclável/rejeito).",
@@ -27,7 +26,8 @@ CHECKLISTS = {
     ]
 }
 
-def escolher_template():
+
+def escolher_template() -> str:
     templates = {
         "1": "Resíduos",
         "2": "Água",
@@ -42,24 +42,10 @@ def escolher_template():
         opcao = input("Digite o número correspondente: ").strip()
         if opcao in templates:
             return templates[opcao]
-        else:
-            print("Opção inválida. Tente novamente.")
+        print("Opção inválida. Tente novamente.")
 
 
-def main():
-    print("=== EcoAudit CLI ===")
-
-    nome = input("Nome da auditoria: ").strip()
-    local = input("Local: ").strip()
-
-    template_escolhido = escolher_template()
-
-    print("\n--- Resumo ---")
-    print(f"Auditoria: {nome}")
-    print(f"Local: {local}")
-    print(f"Tipo: {template_escolhido}")
-
-def escolher_status():
+def escolher_status() -> str:
     opcoes = {
         "1": "Conforme",
         "2": "Atenção",
@@ -77,33 +63,8 @@ def escolher_status():
             return opcoes[opcao]
         print("Opção inválida. Tente novamente.")
 
-def main():
-    print("=== EcoAudit CLI ===")
 
-    nome = input("Nome da auditoria: ").strip()
-    local = input("Local: ").strip()
-
-    template_escolhido = escolher_template()
-
-    print("\nIniciando checklist...\n")
-
-    itens = CHECKLISTS[template_escolhido]
-    respostas = []
-
-    for item in itens:
-        print("\nPergunta:", item)
-
-        status = escolher_status()
-        observacao = input("Observação (opcional): ").strip()
-
-        respostas.append({
-            "item": item,
-            "status": status,
-            "observacao": observacao
-        })
-        from datetime import datetime
-
-def main():
+def main() -> None:
     print("=== EcoAudit CLI ===")
 
     nome = input("Nome da auditoria: ").strip()
@@ -139,11 +100,11 @@ def main():
     # ID único para arquivos
     audit_id = datetime.now().strftime("%Y%m%d-%H%M%S")
 
-    # Pastas
+    # Pastas (somente timestamp)
     os.makedirs("data/audits", exist_ok=True)
     os.makedirs("reports", exist_ok=True)
 
-    # Salvar JSON
+    # Salvar JSON (somente timestamp)
     dados_auditoria = {
         "id": audit_id,
         "nome": nome,
@@ -163,7 +124,7 @@ def main():
     nao_conforme = sum(1 for r in respostas if r["status"] == "Não conforme")
     total = len(respostas)
 
-    # Markdown
+    # Relatório Markdown (somente timestamp)
     conteudo_md = f"""# Relatório de Auditoria Ambiental
 
 ## Informações Gerais
@@ -191,7 +152,7 @@ def main():
 - Observação: {obs}
 """
 
-    # Plano de Ação
+    # Plano de Ação (somente Não conforme)
     nao_conformes = [r for r in respostas if r["status"] == "Não conforme"]
     conteudo_md += "\n## Plano de Ação (Não conformidades)\n"
 
@@ -215,78 +176,6 @@ def main():
     print("\nAuditoria salva com sucesso.")
     print(f"- JSON: {json_path}")
     print(f"- Relatório: {md_path}")
-
-
-    # Criar pasta se não existir e salvar JSON
-    os.makedirs("data", exist_ok=True)
-
-    dados_auditoria = {
-        "nome": nome,
-        "local": local,
-        "template": template_escolhido,
-        "respostas": respostas
-    }
-
-    with open("data/auditoria.json", "w", encoding="utf-8") as arquivo:
-        json.dump(dados_auditoria, arquivo, indent=4, ensure_ascii=False)
-
-    print("\nAuditoria salva com sucesso em data/auditoria.json")
-
-    # Gerar relatório Markdown
-    os.makedirs("reports", exist_ok=True)
-
-    conforme = sum(1 for r in respostas if r["status"] == "Conforme")
-    atencao = sum(1 for r in respostas if r["status"] == "Atenção")
-    nao_conforme = sum(1 for r in respostas if r["status"] == "Não conforme")
-    total = len(respostas)
-
-    conteudo_md = f"""# Relatório de Auditoria Ambiental
-
-## Informações Gerais
-- **Nome:** {nome}
-- **Local:** {local}
-- **Template:** {template_escolhido}
-
-## Resumo
-- Conforme: {conforme}
-- Atenção: {atencao}
-- Não conforme: {nao_conforme}
-- Total de itens: {total}
-
-## Checklist Detalhado
-"""
-
-    for i, r in enumerate(respostas, start=1):
-        obs = r["observacao"] if r["observacao"] else "Nenhuma"
-        conteudo_md += f"""
-### Item {i}
-- Pergunta: {r['item']}
-- Status: {r['status']}
-- Observação: {obs}
-"""
-        # Plano de Ação (somente Não conforme)
-    nao_conformes = [r for r in respostas if r["status"] == "Não conforme"]
-
-    conteudo_md += "\n## Plano de Ação (Não conformidades)\n"
-
-    if not nao_conformes:
-        conteudo_md += "Nenhuma não conformidade registrada.\n"
-    else:
-        conteudo_md += "| # | Item | Observação | Ação sugerida |\n"
-        conteudo_md += "|---:|---|---|---|\n"
-
-        for i, r in enumerate(nao_conformes, start=1):
-            obs = r["observacao"] if r["observacao"] else "Nenhuma"
-            acao = "Definir responsável e prazo; executar correção; registrar evidência."
-            # Evita quebrar tabela se tiver enter
-            obs = obs.replace("\n", " ")
-            conteudo_md += f"| {i} | {r['item']} | {obs} | {acao} |\n"
-    
-
-    with open("reports/relatorio.md", "w", encoding="utf-8") as arquivo_md:
-        arquivo_md.write(conteudo_md)
-
-    print("Relatório gerado em reports/relatorio.md")
 
 
 if __name__ == "__main__":
