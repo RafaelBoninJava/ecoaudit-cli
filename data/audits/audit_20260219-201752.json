@@ -1,0 +1,44 @@
+{
+    "id": "20260219-201752",
+    "nome": "rafa",
+    "local": "piracicaba",
+    "template": "Resíduos",
+    "criado_em": "2026-02-19T20:17:52",
+    "respostas": [
+        {
+            "item": "Lixeiras identificadas e disponíveis (orgânico/reciclável/rejeito).",
+            "status": "Conforme",
+            "observacao": "NA",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Armazenamento temporário de resíduos adequado e limpo.",
+            "status": "Não conforme",
+            "observacao": "NA",
+            "prioridade": "Baixa",
+            "prazo": "22.02.55"
+        },
+        {
+            "item": "Destinação de resíduos com controle/registro (quando aplicável).",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Resíduos perigosos armazenados corretamente (quando aplicável).",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Equipe orientada sobre descarte correto.",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        }
+    ]
+}

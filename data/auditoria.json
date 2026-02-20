@@ -1,0 +1,42 @@
+{
+    "nome": "t",
+    "local": "e",
+    "template": "Resíduos",
+    "respostas": [
+        {
+            "item": "Lixeiras identificadas e disponíveis (orgânico/reciclável/rejeito).",
+            "status": "Conforme",
+            "observacao": "2",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Armazenamento temporário de resíduos adequado e limpo.",
+            "status": "Atenção",
+            "observacao": "3",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Destinação de resíduos com controle/registro (quando aplicável).",
+            "status": "Não conforme",
+            "observacao": "3",
+            "prioridade": "alta",
+            "prazo": "4"
+        },
+        {
+            "item": "Resíduos perigosos armazenados corretamente (quando aplicável).",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Equipe orientada sobre descarte correto.",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        }
+    ]
+}

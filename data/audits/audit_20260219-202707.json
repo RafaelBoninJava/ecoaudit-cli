@@ -1,0 +1,44 @@
+{
+    "id": "20260219-202707",
+    "nome": "rafa",
+    "local": "limiera",
+    "template": "Resíduos",
+    "criado_em": "2026-02-19T20:27:07",
+    "respostas": [
+        {
+            "item": "Lixeiras identificadas e disponíveis (orgânico/reciclável/rejeito).",
+            "status": "Conforme",
+            "observacao": "NA",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Armazenamento temporário de resíduos adequado e limpo.",
+            "status": "Não conforme",
+            "observacao": "f",
+            "prioridade": "fdd",
+            "prazo": "2"
+        },
+        {
+            "item": "Destinação de resíduos com controle/registro (quando aplicável).",
+            "status": "Não conforme",
+            "observacao": "3",
+            "prioridade": "3",
+            "prazo": ""
+        },
+        {
+            "item": "Resíduos perigosos armazenados corretamente (quando aplicável).",
+            "status": "Não conforme",
+            "observacao": "3",
+            "prioridade": "3",
+            "prazo": "3"
+        },
+        {
+            "item": "Equipe orientada sobre descarte correto.",
+            "status": "Não conforme",
+            "observacao": "3",
+            "prioridade": "3",
+            "prazo": "3"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "id": "20260219-152646",
+    "nome": "rf",
+    "local": "empreas",
+    "template": "Energia",
+    "criado_em": "2026-02-19T15:26:46",
+    "respostas": [
+        {
+            "item": "Iluminação eficiente (preferência por LED).",
+            "status": "Atenção",
+            "observacao": "2",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Equipamentos desligados quando fora de uso.",
+            "status": "Conforme",
+            "observacao": "",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Ar-condicionado com manutenção e uso adequado.",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Consumo de energia monitorado (conta/registro).",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Ações para redução de consumo implementadas.",
+            "status": "Conforme",
+            "observacao": "11",
+            "prioridade": "",
+            "prazo": ""
+        }
+    ]
+}

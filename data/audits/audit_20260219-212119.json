@@ -1,0 +1,44 @@
+{
+    "id": "20260219-212119",
+    "nome": "dd",
+    "local": "ww",
+    "template": "Água",
+    "criado_em": "2026-02-19T21:21:19",
+    "respostas": [
+        {
+            "item": "Sem vazamentos visíveis em torneiras, tubulações e descargas.",
+            "status": "Conforme",
+            "observacao": "2",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Práticas de uso racional implementadas (quando aplicável).",
+            "status": "Não conforme",
+            "observacao": "fdfdfd",
+            "prioridade": "baixo",
+            "prazo": "w"
+        },
+        {
+            "item": "Consumo de água monitorado (conta/registro).",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Sem desperdício em áreas externas (lavagens/mangueiras).",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Sinalização/ações de conscientização (quando aplicável).",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        }
+    ]
+}
