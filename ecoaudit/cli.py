@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Any, Dict, List
 
 from .domain import CHECKLISTS, STATUS_OPCOES, TEMPLATES
-from .report import build_markdown_report, save_report_markdown
+from .report import build_markdown_report, save_report_markdown, save_report_csv
 from .storage import list_audit_files, load_audit_json, save_audit_json
 
 
@@ -76,11 +76,12 @@ def criar_auditoria() -> None:
     json_path = save_audit_json(audit, audit_id)
     md = build_markdown_report(audit)
     md_path = save_report_markdown(md, audit_id)
+    csv_path = save_report_csv(audit, audit_id)
 
     print("\nAuditoria salva com sucesso.")
     print(f"- JSON: {json_path}")
     print(f"- Relatório: {md_path}")
-
+    print(f"- CSV: {csv_path}")
 
 def listar_auditorias() -> List[str]:
     files = list_audit_files()
@@ -89,8 +90,20 @@ def listar_auditorias() -> List[str]:
         return []
 
     print("\nAuditorias salvas:")
-    for i, f in enumerate(files, start=1):
-        print(f"{i} - {f}")
+    for i, filename in enumerate(files, start=1):
+        try:
+            audit = load_audit_json(filename)
+            audit_id = audit.get("id", "-")
+            local = audit.get("local", "-")
+            criado_em = audit.get("criado_em", "-")
+            respostas = audit.get("respostas", [])
+            nao_conformes = sum(1 for r in respostas if r.get("status") == "Não conforme")
+
+            print(f"{i} - {audit_id} | {local} | Não conformes: {nao_conformes} | Criado em: {criado_em}")
+        except Exception:
+            # Se algum arquivo estiver corrompido, ainda lista pelo nome
+            print(f"{i} - {filename} (erro ao ler detalhes)")
+
     return files
 
 

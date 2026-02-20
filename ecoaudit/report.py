@@ -1,3 +1,4 @@
+import csv
 import os
 from datetime import datetime
 from typing import Any, Dict, List
@@ -73,4 +74,32 @@ def save_report_markdown(markdown: str, audit_id: str) -> str:
     path = os.path.join("reports", f"report_{audit_id}.md")
     with open(path, "w", encoding="utf-8") as f:
         f.write(markdown)
+    return path
+
+from typing import Any, Dict
+
+def save_report_csv(audit: Dict[str, Any], audit_id: str) -> str:
+    os.makedirs("reports", exist_ok=True)
+    path = os.path.join("reports", f"report_{audit_id}.csv")
+
+    respostas = audit.get("respostas", [])
+
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["id", "nome", "local", "template", "criado_em", "item", "status", "observacao", "prioridade", "prazo"])
+
+        for r in respostas:
+            writer.writerow([
+                audit.get("id", ""),
+                audit.get("nome", ""),
+                audit.get("local", ""),
+                audit.get("template", ""),
+                audit.get("criado_em", ""),
+                r.get("item", ""),
+                r.get("status", ""),
+                r.get("observacao", ""),
+                r.get("prioridade", ""),
+                r.get("prazo", ""),
+            ])
+
     return path
