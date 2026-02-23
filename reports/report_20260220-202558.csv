@@ -1,0 +1,6 @@
+id,nome,local,template,criado_em,item,status,observacao,prioridade,prazo
+20260220-202558,gh,gg,Água,2026-02-20T20:25:58,"Sem vazamentos visíveis em torneiras, tubulações e descargas.",Conforme,,,
+20260220-202558,gh,gg,Água,2026-02-20T20:25:58,Práticas de uso racional implementadas (quando aplicável).,Não conforme,fffdd,,g
+20260220-202558,gh,gg,Água,2026-02-20T20:25:58,Consumo de água monitorado (conta/registro).,Atenção,2,,
+20260220-202558,gh,gg,Água,2026-02-20T20:25:58,Sem desperdício em áreas externas (lavagens/mangueiras).,Conforme,1,,
+20260220-202558,gh,gg,Água,2026-02-20T20:25:58,Sinalização/ações de conscientização (quando aplicável).,Conforme,1,,

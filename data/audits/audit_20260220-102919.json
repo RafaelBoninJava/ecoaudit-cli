@@ -1,0 +1,44 @@
+{
+    "id": "20260220-102919",
+    "nome": "Bonas",
+    "local": "Limeira",
+    "template": "Resíduos",
+    "criado_em": "2026-02-20T10:29:19",
+    "respostas": [
+        {
+            "item": "Lixeiras identificadas e disponíveis (orgânico/reciclável/rejeito).",
+            "status": "Atenção",
+            "observacao": "NA",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Armazenamento temporário de resíduos adequado e limpo.",
+            "status": "Conforme",
+            "observacao": "NA",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Destinação de resíduos com controle/registro (quando aplicável).",
+            "status": "Não conforme",
+            "observacao": "NA",
+            "prioridade": "Baixa",
+            "prazo": "NA"
+        },
+        {
+            "item": "Resíduos perigosos armazenados corretamente (quando aplicável).",
+            "status": "Conforme",
+            "observacao": "1",
+            "prioridade": "",
+            "prazo": ""
+        },
+        {
+            "item": "Equipe orientada sobre descarte correto.",
+            "status": "Conforme",
+            "observacao": "",
+            "prioridade": "",
+            "prazo": ""
+        }
+    ]
+}

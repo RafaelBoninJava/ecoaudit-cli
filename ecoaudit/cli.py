@@ -1,10 +1,11 @@
 from datetime import datetime
 from typing import Any, Dict, List
-
 from .domain import CHECKLISTS, STATUS_OPCOES, TEMPLATES
 from .report import build_markdown_report, save_report_markdown, save_report_csv
 from .storage import list_audit_files, load_audit_json, save_audit_json
 
+def pct(x: int, total: int) -> str:
+    return f"{(x / total * 100):.0f}%" if total else "0%"
 
 def escolher_template() -> str:
     print("\nEscolha o tipo de auditoria:")
@@ -116,14 +117,22 @@ def ver_detalhes_auditoria(filename: str) -> None:
     nao_conforme = sum(1 for r in respostas if r.get("status") == "Não conforme")
     total = len(respostas)
 
+    conforme_pct = pct(conforme, total)
+    atencao_pct = pct(atencao, total)
+    nao_conforme_pct = pct(nao_conforme, total)
+
     print("\n--- Detalhes da Auditoria ---")
     print(f"ID: {audit.get('id', '-')}")
     print(f"Nome: {audit.get('nome', '-')}")
     print(f"Local: {audit.get('local', '-')}")
     print(f"Template: {audit.get('template', '-')}")
     print(f"Criado em: {audit.get('criado_em', '-')}")
-    print(f"Resumo: Conforme={conforme} | Atenção={atencao} | Não conforme={nao_conforme} | Total={total}")
-
+    print(
+        f"Resumo: Conforme={conforme} ({conforme_pct}) | "
+        f"Atenção={atencao} ({atencao_pct}) | "
+        f"Não conforme={nao_conforme} ({nao_conforme_pct}) | "
+        f"Total={total}"
+    )
 
 def run_menu() -> None:
     while True:
