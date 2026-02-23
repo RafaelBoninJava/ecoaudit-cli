@@ -1,4 +1,4 @@
-# EcoAudit CLI & Dashboard
+# EcoAudit — CLI & Dashboard para Auditorias Ambientais
 
 Sistema para auditorias ambientais desenvolvido em Python com arquitetura modular, interface via terminal (CLI) e dashboard web interativo.
 
@@ -52,3 +52,10 @@ Instalar dependências:
 
 ```bash
 pip install streamlit pytest
+```
+
+
+## Autor
+
+Rafael Bonin
+Projeto desenvolvido para portfólio com foco em arquitetura de software, automação e visualização de dados.
