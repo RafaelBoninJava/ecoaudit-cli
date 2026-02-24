@@ -1,6 +1,14 @@
 import os
 import streamlit as st
 
+
+st.set_page_config(
+    page_title="EcoAudit — Painel de Auditoria Ambiental",
+    page_icon="🌿",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 from ecoaudit.storage import list_audit_files, load_audit_json
 from ecoaudit.report import build_markdown_report
 
@@ -11,7 +19,11 @@ st.caption("Visualização estratégica de auditorias ambientais com indicadores
 st.caption("Painel para visualizar auditorias ambientais geradas pelo EcoAudit CLI.")
 
 # --- Sidebar ---
-st.sidebar.header("Auditorias")
+st.sidebar.title("EcoAudit")
+st.sidebar.caption("Auditorias ambientais • CLI + Dashboard")
+st.sidebar.success("Sistema online")
+
+st.sidebar.markdown("### Auditorias")
 files = list_audit_files()
 
 if not files:
@@ -19,6 +31,13 @@ if not files:
     st.stop()
 
 selected = st.sidebar.selectbox("Selecione uma auditoria", files)
+st.sidebar.divider()
+st.sidebar.markdown("### Links")
+
+st.sidebar.link_button(
+    "Repositório no GitHub",
+    "https://github.com/RafaelBoninJava/ecoaudit-cli"
+)
 
 audit = load_audit_json(selected)
 respostas = audit.get("respostas", [])
@@ -27,6 +46,16 @@ conforme = sum(1 for r in respostas if r.get("status") == "Conforme")
 atencao = sum(1 for r in respostas if r.get("status") == "Atenção")
 nao_conforme = sum(1 for r in respostas if r.get("status") == "Não conforme")
 total = len(respostas)
+if nao_conforme > 0:
+    st.error(
+        f"🚨 Risco identificado: {nao_conforme} não conformidade(s) exigem plano de ação imediato."
+    )
+elif atencao > 0:
+    st.warning(
+        f"⚠️ Existem {atencao} item(ns) em atenção que devem ser monitorados."
+    )
+else:
+    st.success("✔ Auditoria 100% conforme.")
 
 # --- Header info ---
 left, right = st.columns([2, 3], gap="large")
@@ -45,11 +74,25 @@ with left:
 with right:
     st.subheader("Resumo")
 
+    # cria as colunas dos cards
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Conforme", conforme)
-    c2.metric("Atenção", atencao)
-    delta_txt = "pendência" if nao_conforme == 1 else "pendências"
-    c3.metric("Não conforme", nao_conforme, delta=f"{nao_conforme} {delta_txt}")
+
+    conforme_pct = round((conforme / total) * 100, 1) if total else 0
+    atencao_pct  = round((atencao / total) * 100, 1) if total else 0
+    nao_pct      = round((nao_conforme / total) * 100, 1) if total else 0
+    
+    indice = conforme_pct
+
+    if indice >= 90:
+        st.success(f"📊 Índice de Conformidade: {indice}% (Excelente)")
+    elif indice >= 70:
+        st.warning(f"📊 Índice de Conformidade: {indice}% (Atenção)")
+    else:
+        st.error(f"📊 Índice de Conformidade: {indice}% (Crítico)")
+
+    c1.metric("Conforme", f"{conforme} ({conforme_pct}%)")
+    c2.metric("Atenção", f"{atencao} ({atencao_pct}%)")
+    c3.metric("Não conforme", f"{nao_conforme} ({nao_pct}%)")
     c4.metric("Total de Itens", total)
 
     st.markdown("**Distribuição de status**")
