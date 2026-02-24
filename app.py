@@ -6,7 +6,8 @@ from ecoaudit.report import build_markdown_report
 
 st.set_page_config(page_title="EcoAudit Dashboard", page_icon="🌱", layout="wide")
 
-st.title("EcoAudit Dashboard")
+st.title("EcoAudit — Painel de Auditoria Ambiental")
+st.caption("Visualização estratégica de auditorias ambientais com indicadores e plano de ação.")
 st.caption("Painel para visualizar auditorias ambientais geradas pelo EcoAudit CLI.")
 
 # --- Sidebar ---
@@ -31,27 +32,33 @@ total = len(respostas)
 left, right = st.columns([2, 3], gap="large")
 
 with left:
-    st.subheader("Informações")
-    st.write(
-        {
-            "ID": audit.get("id", "-"),
-            "Nome": audit.get("nome", "-"),
-            "Local": audit.get("local", "-"),
-            "Template": audit.get("template", "-"),
-            "Criado em": audit.get("criado_em", "-"),
-        }
-    )
+    st.subheader("Informações da Auditoria")
+
+    st.markdown(f"""
+    **ID:** {audit.get("id", "-")}  
+    **Nome:** {audit.get("nome", "-")}  
+    **Local:** {audit.get("local", "-")}  
+    **Template:** {audit.get("template", "-")}  
+    **Criado em:** {audit.get("criado_em", "-")}
+    """)
 
 with right:
     st.subheader("Resumo")
+
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Conforme", conforme)
     c2.metric("Atenção", atencao)
-    c3.metric("Não conforme", nao_conforme)
-    c4.metric("Total", total)
+    delta_txt = "pendência" if nao_conforme == 1 else "pendências"
+    c3.metric("Não conforme", nao_conforme, delta=f"{nao_conforme} {delta_txt}")
+    c4.metric("Total de Itens", total)
 
     st.markdown("**Distribuição de status**")
-    st.bar_chart({"Conforme": conforme, "Atenção": atencao, "Não conforme": nao_conforme})
+    chart_data = {
+        "Conforme": conforme,
+        "Atenção": atencao,
+        "Não conforme": nao_conforme,
+    }
+    st.bar_chart(chart_data)
 
 st.divider()
 
