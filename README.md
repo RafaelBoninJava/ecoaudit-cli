@@ -1,63 +1,72 @@
-# 🌿 EcoAudit — Sistema de Auditoria Ambiental
+# 🌿 EcoAudit — Sistema de Auditoria Ambiental (CLI + Dashboard)
 
-Sistema desenvolvido em Python para auditorias ambientais com geração automática de relatórios e dashboard estratégico interativo.
+Ferramenta em Python para **criar auditorias ambientais via terminal** e **visualizar resultados em um dashboard web (Streamlit)**.  
+Gera relatórios com **timestamp**, exporta **JSON/CSV/Markdown** e destaca **não conformidades com plano de ação**.
 
-🔗 **Acesse online:**  
+🔗 **Demo (Streamlit Cloud):**  
 https://ecoaudit-cli-nylkklhszocohercbstsnu.streamlit.app/
 
 ---
 
-## 🎯 Objetivo
+## ✅ Funcionalidades
 
-O EcoAudit foi criado para estruturar auditorias ambientais de forma organizada, permitindo:
-
-- Aplicação de checklists (Resíduos, Água, Energia)
-- Classificação de conformidade (Conforme, Atenção, Não conforme)
-- Geração automática de plano de ação
-- Cálculo de KPI estratégico (Índice de Conformidade)
-- Visualização executiva via Dashboard Web
-
----
-
-## 📊 Dashboard Estratégico
-
-O sistema apresenta:
-
-- Indicadores percentuais de conformidade
-- Classificação automática de risco
-- KPI com categorização (Excelente / Atenção / Crítico)
-- Visualização gráfica da distribuição de status
-- Plano de ação estruturado
+- Auditorias por template: **Resíduos / Água / Energia**
+- Checklist item a item com status:
+  - **Conforme / Atenção / Não conforme**
+- Se **Não conforme**, registra **Prioridade** e **Prazo**
+- Exportação automática:
+  - JSON (`data/audits/audit_YYYYMMDD-HHMMSS.json`)
+  - Markdown (`reports/report_YYYYMMDD-HHMMSS.md`)
+  - CSV (quando habilitado no projeto)
+- Dashboard Streamlit:
+  - Resumo com métricas
+  - Gráfico de distribuição (barras)
+  - Tabela detalhada do checklist
+  - Alertas de risco / índice de conformidade
+- Testes com `pytest`
 
 ---
 
-## 🧠 Arquitetura
+## 🧱 Arquitetura
 
-O projeto foi estruturado seguindo separação de responsabilidades:
-
-ecoaudit/
-│── cli.py # Interface da aplicação CLI
-│── domain.py # Regras de negócio
-│── storage.py # Persistência (JSON / CSV)
-│── report.py # Geração de relatórios
-│
-app.py # Dashboard Web (Streamlit)
-main.py # Entry point da CLI
+Organizado com separação de responsabilidades:
+ecoaudit-cli/
+├── main.py # Entry point da CLI
+├── app.py # Dashboard (Streamlit)
+├── ecoaudit/
+│ ├── cli.py # Interface da CLI / menu
+│ ├── domain.py # Regras de negócio e modelos
+│ ├── storage.py # Persistência (JSON/CSV)
+│ └── report.py # Geração de relatórios (MD)
+├── data/ # Auditorias geradas (ignorado no Git)
+├── reports/ # Relatórios gerados (ignorado no Git)
+└── tests/ # Testes automatizados
 
 ---
 
-## ⚙️ Tecnologias Utilizadas
+## 🛠 Tecnologias
 
-- Python 3
+- Python 3.10+
 - Streamlit
 - Pytest
-- JSON / CSV
-- Arquitetura modular
+- JSON / CSV / Markdown
 
 ---
 
-## 🚀 Como Executar Localmente
+## ▶️ Como executar localmente
 
+python -m pip install -r requirements.txt
+python main.py
+python -m streamlit run app.py
+python -m pytest
+
+### 1) Clonar e instalar dependências
 ```bash
-pip install -r requirements.txt
-streamlit run app.py
+git clone https://github.com/RafaelBoninJava/ecoaudit-cli.git
+cd ecoaudit-cli
+python -m pip install -r requirements.txt
+
+👤 Autor
+
+Rafael Bonin
+Projeto desenvolvido para portfólio, com foco em arquitetura de software, automação e visualização de dados.
